@@ -1,0 +1,31 @@
+LinkedList<String[]> seperatedFixtures =  createEachTeamFixture(teams);
+        
+        while(teams.size()>0)
+        {
+            String randomlySelectedTeam = teams.get(new Random().nextInt(teams.size()));
+            teams.remove(randomlySelectedTeam);
+            LinkedList<String> opponentTeams = (LinkedList<String>) teams.clone();
+            int week = 1;
+            String[] dedicatedTeamFixture = getTheTeam(seperatedFixtures,randomlySelectedTeam);
+            
+            while(opponentTeams.size()>0)
+            {
+                if(dedicatedTeamFixture[week] != null)
+                {
+                    week++;
+                    continue;
+                }
+                String randomlySelectedOpponentTeam = opponentTeams.get(new Random().nextInt(opponentTeams.size()));
+                
+                while(opponentHasMatchAtThatWeek(seperatedFixtures,week,randomlySelectedOpponentTeam)){
+                    randomlySelectedOpponentTeam = opponentTeams.get(new Random().nextInt(opponentTeams.size()));
+                }
+                
+                String[] dedicatedOpponentTeamFixture = getTheTeam(seperatedFixtures,randomlySelectedOpponentTeam);
+                dedicatedTeamFixture[week] = randomlySelectedOpponentTeam;
+                dedicatedOpponentTeamFixture[week] = randomlySelectedTeam;
+                week++;
+                opponentTeams.remove(randomlySelectedOpponentTeam);
+            }
+        }
+displayFixtures(seperatedFixtures);
