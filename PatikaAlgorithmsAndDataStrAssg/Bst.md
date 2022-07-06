@@ -1,0 +1,1 @@
+![BST](https://user-images.githubusercontent.com/89700270/177640216-dae17d7a-5946-4fd7-bc45-90f60c0399d7.PNG)
